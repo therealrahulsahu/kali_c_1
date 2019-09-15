@@ -1,0 +1,4 @@
+1. WAP in TCP to count how many clients are connected to server.
+2. WAP to create chat application by using TCP.
+3. WAP server store array of 5 students information clients only enter roll and server display it's mark, name and grade.
+4. WAP client enter string and server and server returns upper case letter to client then client disply it.

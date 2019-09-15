@@ -1,0 +1,4 @@
+1. WAP in UDP client send a no. to server and server returns it's armstrong no. or not. Display on client machine.
+2. WAP to create a structure student{roll, name, mark1, mark2, mark3}. Send structure to server and server returns total and average marks to client. Then client display all details of student.
+3. WAP client accept array and send to server. Server sorted it and returns to client. Client display sorted array.
+4. Create chat program by using UDP.
