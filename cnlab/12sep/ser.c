@@ -27,11 +27,13 @@ int main()
         exit(0);
     }
     listen(sockid, 5);
+
+
+    int newfd;
     while (1)
     {
         int size = sizeof(struct sockaddr);
-        int newfd = accept(sockid, (struct sockaddr *) &client, &size);
-
+        newfd = accept(sockid, (struct sockaddr *) &client, &size);
         if (newfd == -1)
         {
             perror("Accept Failed\n");
@@ -42,29 +44,32 @@ int main()
         {
             char *data = (char *) malloc(200 * sizeof(char));
 
-            int rc = recv(newfd, data, 200 * sizeof(char), 0);
+            int rc = read(newfd, data, 200 * sizeof(char));
             if (rc == -1)
             {
                 perror("Reciving Failed\n");
                 exit(0);
             }
-            if(data[0]=='0')
-                break;
+
             data[rc] = '\0';
 
             printf("Message from client : %s\n", data);
 
+            if(data[0]=='0')
+                break;
+
             printf("Enter Message : ");
             scanf("%s", data);
-            int k = send(sockid, data, strlen(data), 0);
+            int k = send(newfd, data, strlen(data), 0);
             if (k == -1)
             {
                 perror("Sending Failed\n");
                 exit(0);
             }
         }
-        close(newfd);
+
     }
+    close(newfd);
     close(sockid);
 
 }

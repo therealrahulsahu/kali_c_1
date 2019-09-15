@@ -8,18 +8,15 @@
 #include<string.h>
 struct student
 {
-    char *name;
+    char name[20];
     int roll;
     float grade;
 };
-struct student *input_data()
+void out_data(struct student *data)
 {
-    struct student *temp = (struct student *)malloc(sizeof(struct student));
-    printf("Enter name : ");
-    scanf("%s", temp->name);
-    printf("Enter Roll No. :");
-    scanf("%s")
+    printf("Name : %s\nRoll : %d\nGrade : %f\n",data->name, data->roll, data->grade);
 }
+
 int main()
 {
     int sockid=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
@@ -49,7 +46,17 @@ int main()
         perror("Accept Failed\n");
         exit(0);
     }
+    int n=2;
+    struct student *data=calloc(1,sizeof(struct student));;
 
+    int rc = read(newfd,data, sizeof(struct student));
+    if(rc<0)
+    {
+        perror("Recieving Failed\n");
+        exit(0);
+    }
+
+    out_data(data);
 
 
 

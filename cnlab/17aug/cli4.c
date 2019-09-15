@@ -14,7 +14,7 @@ int main()
         perror("socket creation failed\n");
         exit(0);
     }
-    struct sockaddr_in server,client;
+    struct sockaddr_in server;
     server.sin_family=AF_INET;
     server.sin_port=htons(5000);
     server.sin_addr.s_addr=inet_addr("127.0.0.1");
@@ -25,15 +25,27 @@ int main()
         perror("Connect failed\n");
         exit(0);
     }
-    char str[30];
-    int rc=recv(sockid,str,sizeof(str),0);
+
+    char *str="Welcome to Kiit \0";
+    printf("Sending... %s\n",str);
+
+    int k=send(sockid, str, strlen(str), 0);
+
+    if(k==-1)
+    {
+        perror("Sendind Failed\n");
+        exit(0);
+    }
+
+    int rc=read(sockid,str,20);
 
     if(rc==-1)
     {
         perror("Received Failed\n");
         exit(0);
     }
+    str[rc]='\0';
 
-    printf("Message fom server is %s\n",str);
+    printf("Message from server is %s\n",str);
     close(sockid);
 }

@@ -36,7 +36,20 @@ int main()
         exit(0);
     }
 
-    char str[20]="Welcome to Kiit";
+    char *str=calloc(20, sizeof(char));
+
+    int rc=read(newfd,str,20);
+
+    if(rc==-1)
+    {
+        perror("Received Failed\n");
+        exit(0);
+    }
+
+    str[rc]='\0';
+
+    for(int i=0;str[i]!='\0';i++)
+        str[i]=str[i]^32;
 
     int k=send(newfd, str, strlen(str), 0);
 
@@ -50,4 +63,3 @@ int main()
     close(sockid);
     close(newfd);
 }
-
