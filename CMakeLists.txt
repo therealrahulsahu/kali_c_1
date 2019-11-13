@@ -3,4 +3,4 @@ project(practice)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(practice cnlab/31oct/ser1.c)
+add_executable(practice exam.c)
